@@ -10,6 +10,8 @@
             <a href="<?= url('dashboard') ?>">B-Link</a>
 
             <?php if (!empty($_SESSION['user'])): ?>
+                <a href="<?= url('residents') ?>">Residents</a>
+                <a href="<?= url('documents') ?>">Documents</a>
                 <a href="<?= url('logout') ?>">Logout</a>
             <?php endif; ?>
         </nav>
