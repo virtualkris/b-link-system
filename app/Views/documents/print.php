@@ -24,17 +24,22 @@
     Issued by: <?= htmlspecialchars($document['issued_by_name'] ?? 'N/A') ?>
 </p>
 
-<p>
-    <button onclick="window.print()">Print</button>
-    <a href="<?= url('documents')?>">Back to Documents</a>
-</p>
+<div class="action-bar">
+    <button class="button-primary" onclick="window.print()">Print</button>
+    <a class="action-link" href="<?= url('documents')?>">&larr; Back</a>
+</div>
 
 <style>
     @media print {
         nav,
+        .app-nav,
+        .nav-toggle,
+        .nav-toggle-label,
+        .alert,
+        .action-bar,
         button,
         a {
-            display: none;
+            display: none !important;
         }
 
         body {

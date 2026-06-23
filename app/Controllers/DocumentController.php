@@ -45,16 +45,16 @@ class DocumentController extends Controller {
         ];
 
         if (empty($residentId) || empty($documentType) || !in_array($documentType, $allowedTypes)) {
-            echo 'Invalid document request.';
-            exit;
+            $_SESSION['error'] = 'Please select a resident and a valid document type.';
+            redirect('documents/create');
         }
 
         $residentModel = new Resident();
         $resident = $residentModel->find($residentId);
 
         if (!$resident) {
-            echo 'Resident not found.';
-            exit;
+            $_SESSION['error'] = 'Selected resident was not found.';
+            redirect('documents/create');
         }
 
         $documentService = new DocumentService();
@@ -73,6 +73,7 @@ class DocumentController extends Controller {
             'content' => $content
         ]);
 
+        $_SESSION['success'] = 'Document generated successfully.';
         redirect('documents/' . $documentId . '/print');
     }
 

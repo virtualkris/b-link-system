@@ -36,6 +36,7 @@ function url($path = '') {
 
 function redirect($path) {
     header('Location: ' . url($path));
+    exit;
 }
 
 spl_autoload_register(function ($class) {

@@ -82,6 +82,11 @@ class Resident extends Model {
                 is_pregnant,
                 is_lactating_mother,
                 is_bedridden,
+                has_medical_condition,
+                medical_condition_details,
+                needs_medicine,
+                mobility_status,
+                evacuation_priority,
                 emergency_contact_name,
                 emergency_contact_number
             ) VALUES (
@@ -112,6 +117,11 @@ class Resident extends Model {
                 :is_pregnant,
                 :is_lactating_mother,
                 :is_bedridden,
+                :has_medical_condition,
+                :medical_condition_details,
+                :needs_medicine,
+                :mobility_status,
+                :evacuation_priority,
                 :emergency_contact_name,
                 :emergency_contact_number
             )
@@ -176,6 +186,11 @@ class Resident extends Model {
                 is_pregnant = :is_pregnant,
                 is_lactating_mother = :is_lactating_mother,
                 is_bedridden = :is_bedridden,
+                has_medical_condition = :has_medical_condition,
+                medical_condition_details = :medical_condition_details,
+                needs_medicine = :needs_medicine,
+                mobility_status = :mobility_status,
+                evacuation_priority = :evacuation_priority,
                 emergency_contact_name = :emergency_contact_name,
                 emergency_contact_number = :emergency_contact_number
             WHERE id = :id

@@ -2,9 +2,9 @@
 
 <p>Generated barangay documents and certificates.</p>
 
-<p>
-    <a href="<?= url('documents/create') ?>">Generate Document</a>
-</p>
+<div class="action-bar">
+    <a class="button-primary" href="<?= url('documents/create') ?>">+ Generate Document</a>
+</div>
 
 <table border="1" cellpadding="8" cellspacing="0">
     <thead>
@@ -26,7 +26,7 @@
                     <td>
                         <?= htmlspecialchars($document['last_name']) ?>,
                         <?= htmlspecialchars($document['first_name']) ?>
-                        <?= htmlspecialchars($document['middle_name']) ?>
+                        <?= htmlspecialchars($document['middle_name'] ?? '') ?>
                     </td>
                     <td><?= htmlspecialchars(str_replace('_', ' ', ucwords($document['document_type'], '_'))) ?></td>
                     <td><?= htmlspecialchars($document['purpose'] ?? 'N/A') ?></td>

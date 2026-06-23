@@ -60,6 +60,7 @@ class ResidentController extends Controller {
         $residentModel = new Resident();
         $residentModel->create($data);
 
+        $_SESSION['success'] = 'Resident registered successfully.';
         redirect('residents');
 
     }
@@ -128,15 +129,17 @@ class ResidentController extends Controller {
         $residentModel = new Resident();
         $residentModel->update($id, $data);
 
+        $_SESSION['success'] = 'Resident updated successfully.';
         redirect('residents/' . $id);
     }
 
     public function archive($id) {
-        $this->requireAuth();
+        $this->requireRole('admin');
 
         $residentModel = new Resident();
         $residentModel->archive($id);
 
+        $_SESSION['success'] = 'Resident archived successfully.';
         redirect('residents');
     }
 
@@ -180,6 +183,11 @@ class ResidentController extends Controller {
             'is_pregnant' => isset($_POST['is_pregnant']) ? 1 : 0,
             'is_lactating_mother' => isset($_POST['is_lactating_mother']) ? 1 : 0,
             'is_bedridden' => isset($_POST['is_bedridden']) ? 1 : 0,
+            'has_medical_condition' => isset($_POST['has_medical_condition']) ? 1 : 0,
+            'medical_condition_details' => $_POST['medical_condition_details'] ?? null,
+            'needs_medicine' => isset($_POST['needs_medicine']) ? 1 : 0,
+            'mobility_status' => $_POST['mobility_status'] ?? 'normal',
+            'evacuation_priority' => $_POST['evacuation_priority'] ?? 'low',
             'emergency_contact_name' => $_POST['emergency_contact_name'] ?? null,
             'emergency_contact_number' => $_POST['emergency_contact_number'] ?? null,
         ];
@@ -196,6 +204,20 @@ class ResidentController extends Controller {
             'civil_status' => 'Civil status',
             'voter_status' => 'Voter status',
         ]));
+
+        $errors = array_merge($errors, Validator::in($data, 'mobility_status', [
+            'normal',
+            'limited',
+            'assisted',
+            'immobile',
+        ], 'Mobility status'));
+
+        $errors = array_merge($errors, Validator::in($data, 'evacuation_priority', [
+            'low',
+            'medium',
+            'high',
+            'critical'
+        ], 'Evacuation priority'));
 
         $errors = array_merge($errors, Validator::in($data, 'gender', ['male', 'female'], 'Gender'));
 

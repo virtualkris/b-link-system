@@ -2,9 +2,9 @@
 
 <p>Resident records and household information.</p>
 
-<p>
-    <a href="<?= url('residents/create') ?>">Register Resident</a>
-</p>
+<div class="action-bar">
+    <a class="button-primary" href="<?= url('residents/create') ?>">+ Register Resident</a>
+</div>
 
 <form action="<?= url('residents') ?>" method="GET">
     <input
@@ -14,10 +14,10 @@
         placeholder="Search residents..."
     >
 
-    <button type="submit">Search</button>
+    <button type="submit" class="button-primary">Search</button>
 
     <?php if (!empty($search)): ?>
-        <a href="<?= url('residents') ?>">Clear</a>
+        <a class="action-link" href="<?= url('residents') ?>">Clear</a>
     <?php endif ?>
 </form>
 
@@ -54,17 +54,18 @@
                         <td><?= htmlspecialchars($resident['purok'] ?? 'N/A') ?></td>
                         <td><?= htmlspecialchars($resident['voter_status'])  ?></td>
                         <td>
-                            <a href="<?= url('residents/' . $resident['id']) ?>">View</a>
-                            <a href="<?= url('residents/' . $resident['id'] . '/edit') ?>">Edit</a>
+                            <div class="table-actions">
+                                <a class="action-link" href="<?= url('residents/' . $resident['id']) ?>">View</a>
+                                <a class="action-link" href="<?= url('residents/' . $resident['id'] . '/edit') ?>">Edit</a>
 
-                            <form
-                                action="<?= url('residents/' . $resident['id'] . '/archive') ?>"
-                                method="POST"
-                                style="display:inline;"
-                                onsubmit="return confirm('Archive this resident?');"
-                            >
-                                <button type="submit">Archive</button>
-                            </form>
+                                <form
+                                    class="archive-form inline-form"
+                                    action="<?= url('residents/' . $resident['id'] . '/archive') ?>"
+                                    method="POST"
+                                >
+                                    <button type="submit" class="button-danger">Archive</button>
+                                </form>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>

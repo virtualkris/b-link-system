@@ -1,8 +1,8 @@
 <h1>Generate Document</h1>
 
-<p>
-    <a href="<?= url('documents') ?>">Back to Documents</a>
-</p>
+<div class="action-bar">
+    <a class="action-link" href="<?= url('documents') ?>">&larr; Back</a>
+</div>
 
 <form action="<?= url('documents/store') ?>" method="POST">
     <div>
@@ -34,5 +34,5 @@
         <input type="text" id="purpose" name="purpose" placeholder="e.g. Employment requirement">
     </div>
 
-    <button type="submit">Generate</button>
+    <button type="submit" class="button-primary">Generate</button>
 </form>
